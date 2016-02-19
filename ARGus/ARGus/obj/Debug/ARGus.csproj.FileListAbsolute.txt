@@ -1,0 +1,10 @@
+c:\users\nino\documents\visual studio 2015\Projects\ARGus\ARGus\bin\Debug\ARGus.dll
+c:\users\nino\documents\visual studio 2015\Projects\ARGus\ARGus\bin\Debug\ARGus.pdb
+c:\users\nino\documents\visual studio 2015\Projects\ARGus\ARGus\obj\Debug\ARGus.csprojResolveAssemblyReference.cache
+c:\users\nino\documents\visual studio 2015\Projects\ARGus\ARGus\obj\Debug\ARGus.dll
+c:\users\nino\documents\visual studio 2015\Projects\ARGus\ARGus\obj\Debug\ARGus.pdb
+C:\Users\Nino\Documents\GitHub\ARGus\ARGus\ARGus\bin\Debug\ARGus.dll
+C:\Users\Nino\Documents\GitHub\ARGus\ARGus\ARGus\bin\Debug\ARGus.pdb
+C:\Users\Nino\Documents\GitHub\ARGus\ARGus\ARGus\obj\Debug\ARGus.csprojResolveAssemblyReference.cache
+C:\Users\Nino\Documents\GitHub\ARGus\ARGus\ARGus\obj\Debug\ARGus.dll
+C:\Users\Nino\Documents\GitHub\ARGus\ARGus\ARGus\obj\Debug\ARGus.pdb
