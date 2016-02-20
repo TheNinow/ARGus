@@ -42,4 +42,4 @@ Simple .NET Commandline Parser that generates a generic object instance from the
 
 ## What data types can I use?
 
-Many .NET date types like ```DateTime, int, float, ...``` are supported. The only exception is if an ImplicitArgument has "isParams" set to true. In this cast the data type has to be ```IEnumerable<string>```
+Many .NET date types like ```DateTime, int, float, ...``` are supported. The only exception is if an ImplicitArgument has "isParams" set to true. In this case the data type has to be ```IEnumerable<string>```
