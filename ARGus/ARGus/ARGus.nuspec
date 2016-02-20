@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>Nino</authors>
+    <owners>Nino</owners>
+    <licenseUrl>https://www.gnu.org/licenses/gpl.txt</licenseUrl>
+    <projectUrl>https://github.com/TheNinow/ARGus</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Simple .NET Commandline Parser that generates a generic object instance from the given arguments</description>
+    <releaseNotes>Initial release</releaseNotes>
+    <copyright>Copyright 2016</copyright>
+    <tags>Arguments Commandline Args</tags>
+  </metadata>
+</package>

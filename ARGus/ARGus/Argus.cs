@@ -52,21 +52,15 @@ namespace ARGus
             var explicitAttribs = GetAttributeMembers<ExplicitArgumentAttribute>(items).ToArray();
             var switchAttribs = GetAttributeMembers<SwitchArgumentAttribute>(items).ToArray();
 
-            if (implicitAttribs.Any(item => item.Item2.DataType != typeof(string) && (!item.Item1.IsParams || item.Item2.DataType != typeof(IEnumerable<string>))))
-                throw new InvalidOperationException("All " + typeof(ImplicitArgumentAttribute).Name + " items have to be of type string or IEnumerable<string> and have params set!");
-
-            if (explicitAttribs.Any(item => item.Item2.DataType != typeof(string)))
-                throw new InvalidOperationException("All " + typeof(ExplicitArgumentAttribute).Name + " items have to be of type string!");
-
-            if (switchAttribs.Any(item => item.Item2.DataType != typeof(bool)))
-                throw new InvalidOperationException("All " + typeof(SwitchArgumentAttribute).Name + " items have to be of type bool!");
+            if (implicitAttribs.Any(item => item.Item1.IsParams && item.Item2.DataType != typeof(IEnumerable<string>)))
+                throw new InvalidOperationException("All " + typeof(ImplicitArgumentAttribute).Name + " items with params set have to be of type IEnumerable<string>!");
 
             var implicitAttribQueue = new Queue<Tuple<ImplicitArgumentAttribute, MemberContainer>>(implicitAttribs);
 
             var paramsAttrib = implicitAttribs.FirstOrDefault(item => item.Item1.IsParams);
 
             if (paramsAttrib != null && !(paramsAttrib.Item2.DataType == typeof(IEnumerable<string>))) throw new InvalidOperationException("A params item must be of type IEnumerable<string>");
-
+           
             var awaitParameter = false;
             MemberContainer awaitContainer = null;
             foreach (var arg in args)
@@ -237,7 +231,16 @@ namespace ARGus
 
             public override void SetValue<T, TU>(T value, TU obj)
             {
-                _propInfo.SetValue(obj, value);
+                object data;
+                try
+                {
+                    data = Convert.ChangeType(value, DataType);
+                }
+                catch
+                {
+                    data = DataType.IsValueType ? Activator.CreateInstance(DataType) : null;
+                }
+                _propInfo.SetValue(obj, data);
             }
         }
 
@@ -259,7 +262,16 @@ namespace ARGus
 
             public override void SetValue<T, TU>(T value, TU obj)
             {
-                _fieldInfo.SetValue(obj, value);
+                object data;
+                try
+                {
+                    data = Convert.ChangeType(value, DataType);
+                }
+                catch
+                {
+                    data = DataType.IsValueType ? Activator.CreateInstance(DataType) : null;
+                }
+                _fieldInfo.SetValue(obj, data);
             }
         }
     }
