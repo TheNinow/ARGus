@@ -60,37 +60,39 @@ namespace ARGus
             var paramsAttrib = implicitAttribs.FirstOrDefault(item => item.Item1.IsParams);
 
             if (paramsAttrib != null && !(paramsAttrib.Item2.DataType == typeof(IEnumerable<string>))) throw new InvalidOperationException("A params item must be of type IEnumerable<string>");
-           
+
             var awaitParameter = false;
             MemberContainer awaitContainer = null;
             foreach (var arg in args)
             {
                 var foundCandidate = false;
-                foreach (var s in OptionalParameterMarker)
-                {
-                    if (arg.StartsWith(s))
+                if (!awaitParameter)
+                    foreach (var s in OptionalParameterMarker)
                     {
-                        foundCandidate = true;
-                        var name = arg.Substring(s.Length);
-                        var explItem = explicitAttribs.FirstOrDefault(item => item.Item1.Name.ToLower() == name.ToLower() || item.Item1.ShortName.ToString().ToLower() == name.ToLower());
-                        if (explItem != null)
+                        if (arg.StartsWith(s))
                         {
-                            awaitContainer = explItem.Item2;
-                            if (awaitParameter)
-                                success = false;
-                            awaitParameter = true;
-                        }
-                        else
-                        {
-                            switchAttribs.FirstOrDefault(item => item.Item1.Name == name || item.Item1.ShortName.ToString() == name)?.Item2.SetValue(true, options);
+                            foundCandidate = true;
+                            var name = arg.Substring(s.Length);
+                            var explItem = explicitAttribs.FirstOrDefault(item => item.Item1.Name.ToLower() == name.ToLower() || item.Item1.ShortName.ToString().ToLower() == name.ToLower());
+                            if (explItem != null)
+                            {
+                                awaitContainer = explItem.Item2;
+                                if (awaitParameter)
+                                    success = false;
+                                awaitParameter = true;
+                            }
+                            else
+                            {
+                                switchAttribs.FirstOrDefault(item => item.Item1.Name == name || item.Item1.ShortName.ToString() == name)?.Item2.SetValue(true, options);
+                            }
                         }
                     }
-                }
                 if (foundCandidate)
                     continue;
 
                 if (awaitParameter)
                 {
+                    awaitParameter = false;
                     awaitContainer.SetValue(arg, options);
                     continue;
                 }
@@ -110,7 +112,8 @@ namespace ARGus
                 nextImplicitItem.Item2.SetValue(arg, options);
             }
 
-            if (implicitAttribQueue.Count > 0 || awaitParameter) success = false;
+            if (implicitAttribQueue.Count > (paramsAttrib == null ? 0 : 1) || awaitParameter)
+                success = false;
 
             return options;
         }
@@ -238,7 +241,10 @@ namespace ARGus
                 }
                 catch
                 {
-                    data = DataType.IsValueType ? Activator.CreateInstance(DataType) : null;
+                    if (value != null)
+                        data = value;
+                    else
+                        data = DataType.IsValueType ? Activator.CreateInstance(DataType) : null;
                 }
                 _propInfo.SetValue(obj, data);
             }
@@ -269,7 +275,10 @@ namespace ARGus
                 }
                 catch
                 {
-                    data = DataType.IsValueType ? Activator.CreateInstance(DataType) : null;
+                    if (value != null)
+                        data = value;
+                    else
+                        data = DataType.IsValueType ? Activator.CreateInstance(DataType) : null;
                 }
                 _fieldInfo.SetValue(obj, data);
             }

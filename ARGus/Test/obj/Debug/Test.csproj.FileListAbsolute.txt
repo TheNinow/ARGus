@@ -1,0 +1,8 @@
+C:\Users\Nino\Documents\GitHub\ARGus\ARGus\Test\bin\Debug\Test.exe.config
+C:\Users\Nino\Documents\GitHub\ARGus\ARGus\Test\bin\Debug\Test.exe
+C:\Users\Nino\Documents\GitHub\ARGus\ARGus\Test\bin\Debug\Test.pdb
+C:\Users\Nino\Documents\GitHub\ARGus\ARGus\Test\bin\Debug\ARGus.dll
+C:\Users\Nino\Documents\GitHub\ARGus\ARGus\Test\bin\Debug\ARGus.pdb
+C:\Users\Nino\Documents\GitHub\ARGus\ARGus\Test\obj\Debug\Test.csprojResolveAssemblyReference.cache
+C:\Users\Nino\Documents\GitHub\ARGus\ARGus\Test\obj\Debug\Test.exe
+C:\Users\Nino\Documents\GitHub\ARGus\ARGus\Test\obj\Debug\Test.pdb
