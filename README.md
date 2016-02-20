@@ -9,7 +9,7 @@ static void Main(string[] args)
         var options = Argus.Parse<Options>(args, out success);
             
         if(!success)
-        Argus.PrintUsage<Options>();
+                Argus.PrintUsage<Options>();
 }
 
 class Options
