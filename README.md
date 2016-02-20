@@ -38,3 +38,8 @@ Simple .NET Commandline Parser that generates a generic object instance from the
 * __ImplicitArgument__ if it's a mandatory argument
 * __ExplicitArgument__ if it's not mandatory and has a value
 * __SwitchArgument__ if it's not mandatory and has no value (true if set, false if not)
+
+
+## What data types can I use?
+
+Many .NET date types like ```DateTime, int, float, ...``` are supported. The only exception is if an ImplicitArgument has "isParams" set to true. In this cast the data type has to be ```IEnumerable<string>```
